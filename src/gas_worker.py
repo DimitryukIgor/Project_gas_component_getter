@@ -24,5 +24,33 @@ class GasWorker:
                     comments=line["Comments"],
                 )
                 self._gas_params_list.append(obj)
+    def get_area(self) -> tuple[float]:
+        area_h2 = 0.0
+        area_co = 0.0
+        area_co2 = 0.0
+        area_ch4 = 0.0
+        for i in range(1, len(self._gas_params_list)):
+            time_diff = (
+                self._gas_params_list[i].trel - self._gas_params_list[i-1].trel
+            )
+            area_h2 += (
+                (self._gas_params_list[i].h_2 + self._gas_params_list[i-1].h_2)
+                * time_diff / 2
+            )
+            area_co += (
+                    (self._gas_params_list[i].co + self._gas_params_list[i - 1].co)
+                    * time_diff / 2
+            )
+            area_co2 += (
+                    (self._gas_params_list[i].co_2 + self._gas_params_list[i - 1].co_2)
+                    * time_diff / 2
+            )
+            area_ch4 += (
+                    (self._gas_params_list[i].ch_4 + self._gas_params_list[i - 1].ch_4)
+                    * time_diff / 2
+            )
+        area = area_h2 + area_co + area_co2 + area_ch4
+        return area_h2, area_co, area_co2, area_ch4, area
+
 
 
