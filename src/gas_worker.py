@@ -52,5 +52,10 @@ class GasWorker:
         area = area_h2 + area_co + area_co2 + area_ch4
         return area_h2, area_co, area_co2, area_ch4, area
 
-
+    @staticmethod
+    def print_concentration_results(area_h2, area_co, area_co2, area_ch4, area):
+        print(f"Концентрация H2 равна {round(area_h2 * 100 / area, 2)}")
+        print(f"Концентрация CO равна {round(area_co * 100 / area, 2)}")
+        print(f"Концентрация CO2 равна {round(area_co2 * 100 / area, 2)}")
+        print(f"Концентрация CH4 равна {round(area_ch4 * 100 / area, 2)}")
 
